@@ -1,12 +1,9 @@
 """Тест для параметра url_param"""
 
+import requests
 
-def test_url2(url_param, status_code_param):
-    """Если в --url_param передать не ya.ru, то в status code будет 404"""
-    if url_param == 'https://ya.ru':
-        status_code_param = '200'
-        print(url_param, status_code_param)
-    else:
-        status_code_param = '404'
-        print(url_param, status_code_param)
-        #assert False
+def test_url_and_status_code(url_param):
+    """Тест для проверки status_code"""
+    response = requests.get(url_param)
+    assert response.status_code == 200
+    print('status_code is OK \n' + str(response))
