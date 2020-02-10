@@ -20,6 +20,7 @@ def url_param(request):
     """Фикстура для перадачи url"""
     return request.config.getoption('--url')
 
+
 @pytest.fixture
 def status_code(request):
     """Фикстура для перадачи url"""
