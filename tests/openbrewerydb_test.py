@@ -25,7 +25,9 @@ def test_assert_id(url_param, expected):
 
 @pytest.mark.parametrize('url_param,expected', [('https://api.openbrewerydb.org/breweries?by_city=san_diego', 20,),
                                                 ('https://api.openbrewerydb.org/breweries?by_city=moscow', 4),
-                                                ('https://api.openbrewerydb.org/breweries?by_city=saint-petersburg', 0)])
+                                                (
+                                                        'https://api.openbrewerydb.org/breweries?by_city=saint-petersburg',
+                                                        0)])
 def test_assert_count(url_param, expected):
     """Проверка количества пивоварен по городам"""
     response = requests.get(url_param, expected)
@@ -33,23 +35,25 @@ def test_assert_count(url_param, expected):
     count_brewery = len(json_dict)
     assert count_brewery == expected
 
-@pytest.mark.parametrize('url_param,expected',[('https://api.openbrewerydb.org/breweries?by_city=san_diego', None),
-                                               ('https://api.openbrewerydb.org/breweries?by_city=moscow', None),
-                                                ('https://api.openbrewerydb.org/breweries?by_city=las-vegas', None) ])
-def test_assert_list_after_clear(url_param,expected):
+
+@pytest.mark.parametrize('url_param,expected', [('https://api.openbrewerydb.org/breweries?by_city=san_diego', None),
+                                                ('https://api.openbrewerydb.org/breweries?by_city=moscow', None),
+                                                ('https://api.openbrewerydb.org/breweries?by_city=las-vegas', None)])
+def test_assert_list_after_clear(url_param, expected):
     """Проверка очистки словаря пивоварен"""
     response = requests.get(url_param)
     json_dict = response.json()
     assert json_dict.clear() == expected
 
-@pytest.mark.parametrize('url_param,expected',[('https://api.openbrewerydb.org/breweries?by_city=san_diego',
-                                                fixed_data.TESTKEYS),
-                                               ('https://api.openbrewerydb.org/breweries?by_city=moscow',
-                                                fixed_data.TESTKEYS),
+
+@pytest.mark.parametrize('url_param,expected', [('https://api.openbrewerydb.org/breweries?by_city=san_diego',
+                                                 fixed_data.TESTKEYS),
+                                                ('https://api.openbrewerydb.org/breweries?by_city=moscow',
+                                                 fixed_data.TESTKEYS),
                                                 ('https://api.openbrewerydb.org/breweries?by_city=saint-petersburg',
-                                                [])
-                                               ])
-def test_assert_keys(url_param,expected):
+                                                 [])
+                                                ])
+def test_assert_keys(url_param, expected):
     """Проверка ключей"""
     response = requests.get(url_param)
     json_dict = response.json()
