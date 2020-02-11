@@ -27,7 +27,7 @@ def test_assert_id(url_param, expected):
                                                 ('https://api.openbrewerydb.org/breweries?by_city=moscow', 4),
                                                 ('https://api.openbrewerydb.org/breweries?by_city=saint-petersburg', 0)])
 def test_assert_count(url_param, expected):
-    """Проверка количества пивоварен в по городам"""
+    """Проверка количества пивоварен по городам"""
     response = requests.get(url_param, expected)
     json_dict = response.json()
     count_brewery = len(json_dict)
@@ -50,7 +50,7 @@ def test_assert_list_after_clear(url_param,expected):
                                                 [])
                                                ])
 def test_assert_keys(url_param,expected):
-    """Проверка ключи"""
+    """Проверка ключей"""
     response = requests.get(url_param)
     json_dict = response.json()
     fact_list = []
